@@ -1,7 +1,7 @@
-from django.urls import path
-
-from . import views
+from django.conf.urls import url
+from blog.views import ArticleList, ArticleDetail
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    url(r'^articles/$', ArticleList.as_view()),
+    url(r'^article/(?P<pk>[0-9]+)/$', ArticleDetail.as_view()),
 ]
