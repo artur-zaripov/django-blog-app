@@ -3,9 +3,11 @@ from blog.models import User, Article
 
 
 class UserSerializer(serializers.ModelSerializer):
+    articles = serializers.PrimaryKeyRelatedField(many=True, queryset=Article.objects.all())
+
     class Meta:
         model = User
-        fields = ['name']
+        fields = ['name', 'articles']
 
 
 class ArticleSerializer(serializers.Serializer):

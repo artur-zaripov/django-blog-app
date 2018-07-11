@@ -8,8 +8,8 @@ from blog.serializers import ArticleSerializer
 
 class ArticleList(APIView):
     def get(self, request, format=None):
-        snippets = Article.objects.all()
-        serializer = ArticleSerializer(snippets, many=True)
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
 
 

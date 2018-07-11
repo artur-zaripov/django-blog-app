@@ -10,7 +10,7 @@ class User(models.Model):
 
 
 class Article(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='articles', on_delete=models.CASCADE)
     text = models.CharField(max_length=2000)
     pub_date = models.DateTimeField('date published')
 
