@@ -33,7 +33,7 @@ class ArticleList(APIView):
     permission_classes = (IsAuthenticated, IsOwner)
 
     def get(self, request, format=None):
-        articles = Article.objects.all()
+        articles = Article.objects.filter(user=request.user)
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
 
@@ -41,15 +41,15 @@ class ArticleList(APIView):
 class ArticleDetail(APIView):
     permission_classes = (IsAuthenticated, IsOwner)
 
-    def get_object(self, pk):
+    def get_object(self, request, pk):
         try:
-            return Article.objects.filter(pk=pk)
+            return Article.objects.filter(pk=pk).filter(user=request.user)
         except Article.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
-        snippets = self.get_object(pk)
-        serializer = ArticleSerializer(snippets, many=True)
+        articles = self.get_object(request, pk)
+        serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
