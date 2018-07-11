@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from blog.models import User, Article
+from django.contrib.auth.models import User
+from blog.models import Article
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -7,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['name', 'articles']
+        fields = ['username', 'articles']
 
 
 class ArticleSerializer(serializers.Serializer):

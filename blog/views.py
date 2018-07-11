@@ -1,9 +1,21 @@
 from django.http import Http404
+from django.contrib.auth.models import User
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from blog.models import Article
-from blog.serializers import ArticleSerializer
+from blog.serializers import ArticleSerializer, UserSerializer
+
+
+class UserList(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class ArticleList(APIView):
