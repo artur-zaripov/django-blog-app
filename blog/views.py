@@ -9,6 +9,14 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from blog.models import Article
 from blog.serializers import ArticleSerializer, UserSerializer
+from blog.permissions import IsOwner
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'articles': reverse('article-list', request=request, format=format)
+    })
 
 
 class UserList(ListAPIView):
