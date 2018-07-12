@@ -1,28 +1,27 @@
 # Simple Blog Application powered by Django
 
 ## Required
-Python 3
+Docker (http://docker.com).
 
-## Set up
-`pip install django`
+## Build & run
+`docker-compose build`
 
-`pip install djangorestframework`
+`docker-compose up`
 
-`python manage.py migrate`
+## API root
 
-## How to run
-`python manage.py runserver`
-
-open `localhost:8000/api/v1/articles` in browser
+Open `localhost:8000` in browser
 
 ## Available URLs
-GET `/api/v1/articles` - list of articles
+GET `/api/v1/users` - list of user (admin access required)
+
+GET `/api/v1/articles` - list of current user's articles
 
 GET `/api/v1/article/<id>` - article details
 
 POST `/api/v1/article` - add article
 
 ## Administration panel
-`python manage.py createsuperuser` - set up admin username and password
+Default superuser is defined in `docker-compose.yml`
 
 `localhost:8000/admin` - admin panel
