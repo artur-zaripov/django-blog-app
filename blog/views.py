@@ -1,12 +1,12 @@
 from django.http import Http404
 from django.contrib.auth.models import User
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from blog.models import Article
 from blog.serializers import ArticleSerializer, UserSerializer
 from blog.permissions import IsOwner
@@ -15,16 +15,13 @@ from blog.permissions import IsOwner
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
+        'users': reverse('user-list', request=request, format=format),
         'articles': reverse('article-list', request=request, format=format)
     })
 
 
 class UserList(ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDetail(RetrieveAPIView):
+    permission_classes = [IsAdminUser]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
