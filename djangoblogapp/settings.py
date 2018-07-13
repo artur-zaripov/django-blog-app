@@ -25,7 +25,9 @@ SECRET_KEY = 'q7f9e22gnd8bfbo@u02_gtmlmy!9%r9(pgdkr^1)=aro$yr3)&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
@@ -120,5 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/djangoblogapp/static/'
 
 REST_FRAMEWORK = {}
